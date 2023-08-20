@@ -4,6 +4,10 @@ import { InformationCircleIcon } from "@heroicons/react/20/solid";
 import Navbar from "../../../components/Navbar";
 import Footer from "../../../components/Footer";
 import Image from "next/image";
+import FbShare from "../../../components/FbShare";
+import RedditShare from "../../../components/RedditShare";
+import TwitterShare from "../../../components/TwitterShare";
+
 
 async function getData(slug) {
   const api = "http://localhost:3000/api/post/" + slug;
@@ -19,12 +23,12 @@ async function getData(slug) {
   return res.json();
 }
 
-export async function generateMetadata({ params: {slug}}, parent) {
+export async function generateMetadata({ params: { slug } }, parent) {
   const postData = await getData(slug);
   const post = postData[0];
   // optionally access and extend (rather than replace) parent metadata
-  const previousImages = (await parent).openGraph?.images || []
- 
+  const previousImages = (await parent).openGraph?.images || [];
+
   return {
     title: post.title + " | Disney Dreamer's Guide",
     description: post.description,
@@ -38,7 +42,7 @@ export async function generateMetadata({ params: {slug}}, parent) {
         },
         ...previousImages,
       ],
-      url: "https://disneydreamersguide.com/post/" + post.slug, 
+      url: "https://disneydreamersguide.com/post/" + post.slug,
       title: post.title,
       description: post.description,
       type: "article",
@@ -71,7 +75,7 @@ export async function generateMetadata({ params: {slug}}, parent) {
         content: post.category,
       },
     ],
-  }
+  };
 }
 
 const Post = async ({ params: { slug } }) => {
@@ -79,13 +83,12 @@ const Post = async ({ params: { slug } }) => {
   const post = postData[0];
   return (
     <>
-      
       <div className="bg-page-pattern">
         <Navbar />
         <div className="bg-white px-6 py-8 lg:px-8">
           <div className="mx-auto max-w-3xl text-base leading-7 text-gray-700">
             <p className="text-base font-semibold leading-7 text-indigo-600">
-              {post.category.toUpperCase()}
+              {post.category}
             </p>
             <h1 className="mt-2 text-3xl font-bold tracking-tight text-black sm:text-4xl">
               {post.title}
@@ -106,11 +109,12 @@ const Post = async ({ params: { slug } }) => {
                   aria-hidden="true"
                 />
                 {console.log(post)}
-                <a href={post.photographerUrl}>
-                Photo by {post.photographer}
-                </a>
+                <a href={post.photographerUrl}>Photo by {post.photographer}</a>
               </figcaption>
             </figure>
+            <FbShare post={post} />
+            <RedditShare post={post} />
+            <TwitterShare post={post} />
             <ReactMarkdown>{post.body}</ReactMarkdown>
           </div>
         </div>

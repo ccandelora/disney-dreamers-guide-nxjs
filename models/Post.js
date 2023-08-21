@@ -1,4 +1,4 @@
-//mdoles/post.js
+//modles/post.js
 
 import mongoose, { Schema, models, model } from 'mongoose';
 

@@ -47,12 +47,12 @@ export default function Navbar() {
             onClick={() => setMobileMenuOpen(true)}
           >
             <span className="sr-only">Open main menu</span>
-            <Bars3Icon className="h-6 w-6" aria-hidden="true" />
+            <Bars3Icon className="h-12 w-12 " aria-hidden="true" />
           </button>
         </div>
         <Popover.Group className="hidden lg:flex lg:gap-x-12">
           <Popover className="relative">
-            <Popover.Button className="flex items-center gap-x-1 text-sm font-semibold leading-6 text-white">
+            <Popover.Button className="flex items-center gap-x-1 text-xl font-semibold leading-6 text-white">
               Wait Times
               <ChevronDownIcon
                 className="h-5 w-5 flex-none text-white"
@@ -92,7 +92,7 @@ export default function Navbar() {
             </Transition>
           </Popover>
 
-          <a href="/" className="text-sm font-semibold leading-6 text-white">
+          <a href="/" className="text-xl font-semibold leading-6 text-white">
             Home
           </a>
         </Popover.Group>

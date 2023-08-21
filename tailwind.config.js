@@ -10,7 +10,7 @@ module.exports = {
     extend: {
       backgroundImage: {
         "page-pattern":
-          "url('http://www.localhost:3000/seamless-tiling-clouds-gffdcf08bf_1920.jpg')",
+          "url('/seamless-tiling-clouds-gffdcf08bf_1920.jpg')",
       },
     },
   },

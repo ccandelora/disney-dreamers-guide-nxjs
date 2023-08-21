@@ -1,7 +1,9 @@
 const domain = 'https://www.disneydreamersguide.com';
 
-async function getData() {
-    const res = await fetch('http://localhost:3000/api/post')
+async function getData(path) {
+    const domain = process.env.API_DOMAIN
+    const url = domain + path
+    const res = await fetch(url)
     // The return value is *not* serialized
     // You can return Date, Map, Set, etc.
    
@@ -14,7 +16,8 @@ async function getData() {
   }
 
   export default async function sitemap() {
-    const postsData = await getData()
+    const postsData = await getData('/api/post')
+    const categoriesData = await getData('/api/category')
     const posts = postsData.map(({ slug, updatedAt }) => (
         {
         url: `${domain}/post/${slug}`,
@@ -25,6 +28,13 @@ async function getData() {
         url: `${domain}${route}`,
         lastModified: new Date().toISOString(),
       }));
+
+      const categories = categoriesData.map(({ _id }) => (
+        {
+        url: `${domain}/category/${_id.categorySlug}`,
+        lastModified: new Date().toISOString(),
+      }));
+
      
-      return [...routes, ...posts];
+      return [...routes, ...categories, ...posts];
   }

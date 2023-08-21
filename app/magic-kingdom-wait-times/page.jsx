@@ -9,7 +9,8 @@ import Hero from "../../components/Hero";
 import photo from "../../public/magic-kingdom.jpg";
 
 async function getData() {
-  const api = "http://localhost:3000/api/magic-kingdom-wait-times";
+  const domain = process.env.API_DOMAIN;
+  const api = domain + "/api/magic-kingdom-wait-times";
   const res = await fetch(api, { cache: "no-cache" });
   // The return value is *not* serialized
   // You can return Date, Map, Set, etc.

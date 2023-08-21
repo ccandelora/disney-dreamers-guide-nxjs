@@ -3,7 +3,8 @@ import CategoryContent from '../../../components/CategoryContent'
 import Footer from '../../../components/Footer'
 
 async function getData(slug) {
-  const res = await fetch('http://localhost:3000/api/category/' + slug, { cache: 'no-cache' })
+  const domain = process.env.API_DOMAIN
+  const res = await fetch(domain +'/api/category/' + slug, { cache: 'no-cache' });
   // The return value is *not* serialized
   // You can return Date, Map, Set, etc.
  

@@ -3,7 +3,8 @@ import HomeContent from '../components/HomeContent'
 import Footer from '../components/Footer'
 
 async function getData() {
-  const res = await fetch('http://localhost:3000/api/post')
+  const domain = process.env.API_DOMAIN
+  const res = await fetch(domain +'/api/post')
   // The return value is *not* serialized
   // You can return Date, Map, Set, etc.
  

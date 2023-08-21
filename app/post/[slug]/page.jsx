@@ -8,10 +8,10 @@ import FbShare from "../../../components/FbShare";
 import RedditShare from "../../../components/RedditShare";
 import TwitterShare from "../../../components/TwitterShare";
 
-
 async function getData(slug) {
-  const api = "http://localhost:3000/api/post/" + slug;
-  const res = await fetch(api);
+  const domain = process.env.API_DOMAIN;
+  const res = await fetch(domain + "/api/post/" + slug);
+
   // The return value is *not* serialized
   // You can return Date, Map, Set, etc.
 
@@ -112,9 +112,16 @@ const Post = async ({ params: { slug } }) => {
                 <a href={post.photographerUrl}>Photo by {post.photographer}</a>
               </figcaption>
             </figure>
-            <FbShare post={post} />
-            <RedditShare post={post} />
-            <TwitterShare post={post} />
+            <div className="mt-3 flex items-center gap-x-2 text-xs">
+              <FbShare post={post}/>
+        
+          
+              <RedditShare post={post}  />
+          
+            
+              <TwitterShare post={post}  />
+            </div>
+          
             <ReactMarkdown>{post.body}</ReactMarkdown>
           </div>
         </div>

@@ -8,7 +8,8 @@ import ParkCard from "../../components/ParkCard";
 import Hero from "../../components/Hero";
 
 async function getData() {
-  const api = "http://localhost:3000/api/epcot-wait-times";
+  const domain = process.env.API_DOMAIN;
+  const api = domain + "/api/epcot-wait-times";
   const res = await fetch(api, { cache: "no-cache" });
   // The return value is *not* serialized
   // You can return Date, Map, Set, etc.

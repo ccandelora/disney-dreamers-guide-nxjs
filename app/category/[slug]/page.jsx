@@ -4,7 +4,7 @@ import Footer from '../../../components/Footer'
 
 async function getData(slug) {
   const domain = process.env.API_DOMAIN
-  const res = await fetch(domain +'/api/category/' + slug, { cache: 'no-cache' });
+  const res = await fetch(domain +'/api/category/' + slug);
   // The return value is *not* serialized
   // You can return Date, Map, Set, etc.
  

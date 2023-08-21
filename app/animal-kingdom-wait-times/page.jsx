@@ -9,7 +9,7 @@ import Hero from "../../components/Hero";
 async function getData() {
   const domain = process.env.API_DOMAIN;
   const api = domain +"/api/animal-kingdom-wait-times";
-  const res = await fetch(api, { cache: "no-cache" });
+  const res = await fetch(api);
   // The return value is *not* serialized
   // You can return Date, Map, Set, etc.
 

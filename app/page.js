@@ -28,7 +28,6 @@ export default async function Home() {
   return (
     <div className="bg-page-pattern">
       <Navbar />
-    
       <HomeContent posts={posts}/>
       <Footer />
     </div>  

@@ -1,17 +1,15 @@
-"use clinet";
+'use clinet';
 // Purpose: Displays the Magic Kingdom wait times page
 import React from "react";
-import { InformationCircleIcon } from "@heroicons/react/20/solid";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import ParkCard from "../../components/ParkCard";
 import Hero from "../../components/Hero";
-import photo from "../../public/magic-kingdom.jpg";
 
 async function getData() {
   const domain = process.env.API_DOMAIN;
-  const api = domain + "/api/magic-kingdom-wait-times";
-  const res = await fetch(api);
+  const api = "https://queue-times.com/en-US/parks/6/queue_times.json";
+  const res = await fetch(api, { cache: "no-cache" });
   // The return value is *not* serialized
   // You can return Date, Map, Set, etc.
 
@@ -23,11 +21,12 @@ async function getData() {
   return res.json();
 }
 
+
 export default async function MagicKingdomWaitTimes() {
-  const lands = await getData();
   const photo = "/younho-choo-f6ImWlMhn18-unsplash.jpg"
   const alt = "Magic Kingdom"
   const title = "Magic Kingdom Wait Times"
+  const lands = await getData();
 
   return (
     <>
@@ -35,7 +34,7 @@ export default async function MagicKingdomWaitTimes() {
       <Navbar />
       </div>
       <Hero photo={photo} alt={alt} title={title}/>
-      <ParkCard {...lands} />
+      <ParkCard lands={lands}/> 
       <Footer />
     </>
   );

@@ -1,4 +1,3 @@
-"use clinet";
 // Purpose: Displays the Magic Kingdom wait times page
 import React from "react";
 import Navbar from "../../components/Navbar";
@@ -6,12 +5,16 @@ import Footer from "../../components/Footer";
 import ParkCard from "../../components/ParkCard";
 import Hero from "../../components/Hero";
 
+//export async function getStaticParams() {
+//  const res = await fetch('/api/animal-kingdom-wait-times').then((res) => res.json())
+//  const lands = await res.json()
+//  return lands 
+//}
+
 async function getData() {
   const domain = process.env.API_DOMAIN;
-  const api = domain +"/api/animal-kingdom-wait-times";
-  const res = await fetch(api);
-  // The return value is *not* serialized
-  // You can return Date, Map, Set, etc.
+  //const api = "http://localhost:3000/api/animal-kingdom-wait-times";
+  const res = await fetch('https://queue-times.com/en-US/parks/8/queue_times.json', { cache: 'no-cache' });
 
   if (!res.ok) {
     // This will activate the closest `error.js` Error Boundary
@@ -30,7 +33,7 @@ export default async function AnimalKingdomWaitTimes() {
       <Navbar />
       </div>
       <Hero photo="/stephanie-klepacki-M1Pjq6RPDFU-unsplash.jpg" alt="Animal Kingdom Wait Times" title="Animal Kingdom Wait Times"/>
-      <ParkCard {...lands} />
+      <ParkCard lands={lands} />
       <Footer />
     </>
   );

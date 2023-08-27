@@ -1,10 +1,10 @@
 "use client";
 import React from "react";
-import { CheckCircleIcon, XCircleIcon } from "@heroicons/react/24/solid";
+
 
 export default function ParkCard(props) {
-  const lands = props.lands;
-
+const { lands } = props.lands;
+  
   return (
     <div className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-20 bg-white my-1">
       <ul
@@ -16,7 +16,6 @@ export default function ParkCard(props) {
             <li key={land.name} className="relative">
               <div className="group block w-full aspect-w-10 aspect-h-7 rounded-lg overflow-hidden">
                 <h2 className="font-bold">{land.name}</h2>
-                {console.log(land)}
                 {land.rides.map((ride) => {
                   return (
                     <div key={ride.id} className="relative border-4 border-slate-200 my-5 rounded-lg">

@@ -2,9 +2,17 @@ import Navbar from '../../../components/Navbar'
 import CategoryContent from '../../../components/CategoryContent'
 import Footer from '../../../components/Footer'
 
+export async function getStaticParams() {
+  const res = await fetch('http://localhost:3000/api/category').then((res) => res.json())
+  const posts = await res.json()
+  return posts.map((post) => ({
+      slug: post.categorySlug,
+  }))  
+}
+
 async function getData(slug) {
   const domain = process.env.API_DOMAIN
-  const res = await fetch(domain +'/api/category/' + slug);
+  const res = await fetch(domain + "/api/category/" + slug);
   // The return value is *not* serialized
   // You can return Date, Map, Set, etc.
  

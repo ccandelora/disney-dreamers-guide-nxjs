@@ -1,7 +1,6 @@
 "use clinet";
 // Purpose: Displays the Magic Kingdom wait times page
 import React from "react";
-import { InformationCircleIcon } from "@heroicons/react/20/solid";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import ParkCard from "../../components/ParkCard";
@@ -9,13 +8,9 @@ import Hero from "../../components/Hero";
 
 async function getData() {
   const domain = process.env.API_DOMAIN;
-  const api = domain + "/api/epcot-wait-times";
-  const res = await fetch(api);
-  // The return value is *not* serialized
-  // You can return Date, Map, Set, etc.
-
+  const api = 'https://queue-times.com/en-US/parks/5/queue_times.json';
+  const res = await fetch(api, {cache: 'no-cache' });
   if (!res.ok) {
-    // This will activate the closest `error.js` Error Boundary
     throw new Error("Failed to fetch data");
   }
 
@@ -24,6 +19,7 @@ async function getData() {
 
 export default async function EpcotWaitTimes() {
   const lands = await getData();
+  console.log(lands);
 
   return (
     <>
@@ -31,7 +27,7 @@ export default async function EpcotWaitTimes() {
       <Navbar />
       </div>
       <Hero photo="/frances-gunn-c9z9RlCh0Zo-unsplash.jpg" alt="Epcot" title="Epcot Wait Times"/>
-      <ParkCard {...lands} />
+      <ParkCard lands={lands} />
       <Footer />
     </>
   );

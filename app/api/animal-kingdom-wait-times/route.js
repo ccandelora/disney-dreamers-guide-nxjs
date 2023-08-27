@@ -1,12 +1,14 @@
-import axios from "axios";
+
 import { NextResponse } from "next/server";
 
 export async function GET() {
   try {
-        const respone = await axios.get(
+        const respone = await fetch(
         "https://queue-times.com/en-US/parks/8/queue_times.json"
         );
-        const data = respone.data;
+        const data = await respone.json();
+        console.log(data);
+     
         return NextResponse.json(data, { status: 200 });
   } catch (error) {
         return NextResponse.json(error, { status: 500 });

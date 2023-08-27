@@ -8,9 +8,17 @@ import FbShare from "../../../components/FbShare";
 import RedditShare from "../../../components/RedditShare";
 import TwitterShare from "../../../components/TwitterShare";
 
+export async function getStaticParams() {//
+  const res = await fetch('http://localhost:3000/api/post').then((res) => res.json())
+  const posts = await res.json()
+  return posts.map((post) => ({
+      slug: post.slug,
+  }))  
+}
+
 async function getData(slug) {
   const domain = process.env.API_DOMAIN;
-  const res = await fetch(domain + "/api/post/" + slug);
+  const res = await fetch(domain + "/api/post/" + slug, {cache: 'no-cache' });
 
   // The return value is *not* serialized
   // You can return Date, Map, Set, etc.

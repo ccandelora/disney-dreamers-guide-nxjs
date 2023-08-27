@@ -1,6 +1,5 @@
-import { NextResponse } from "next/server";
 import clientPromise from "../../../../libs/mongodb";
-
+import { NextResponse } from "next/server";
 
 export async function GET(request, { params }){
     const slug  = params.slug;

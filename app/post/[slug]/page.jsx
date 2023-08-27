@@ -9,7 +9,7 @@ import RedditShare from "../../../components/RedditShare";
 import TwitterShare from "../../../components/TwitterShare";
 
 export async function getStaticParams() {//
-  const res = await fetch('http://localhost:3000/api/post').then((res) => res.json())
+  const res = await fetch('/api/post').then((res) => res.json())
   const posts = await res.json()
   return posts.map((post) => ({
       slug: post.slug,

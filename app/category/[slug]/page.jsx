@@ -3,7 +3,7 @@ import CategoryContent from '../../../components/CategoryContent'
 import Footer from '../../../components/Footer'
 
 export async function getStaticParams() {
-  const res = await fetch('http://localhost:3000/api/category').then((res) => res.json())
+  const res = await fetch('/api/category/').then((res) => res.json())
   const posts = await res.json()
   return posts.map((post) => ({
       slug: post.categorySlug,
@@ -24,36 +24,39 @@ async function getData(slug) {
   return res.json()
 }
 
-export async function generateMetadata({ params: {slug}}, parent) {
-  const postData = await getData(slug);
-  const post = postData[0];
-  // optionally access and extend (rather than replace) parent metadata
-  const previousImages = (await parent).openGraph?.images || []
- 
-  return {
-    title: "Disney Dreamer's Guide : "+ post.category,
-    description: post.category + " Category",
-    openGraph: {
-      url: "https://disneydreamersguide.com/category/" + post.categorySlug, 
-      title: "Disney Dreamer's Guide : "+ post.category,
-      description: post.category + " Category",
-      type: "website",
-    },
-    twitter: {
-      cardType: "summary_large_image",
-    },
-  }
-}
+//export async function generateMetadata({ params: {slug}}, parent) {
+//  const postData = await getData(slug);
+//  const post = postData[0];
+//  // optionally access and extend (rather than replace) parent metadata
+//  const previousImages = (await parent).openGraph?.images || []
+// 
+//  return {
+//    title: "Disney Dreamer's Guide : "+ post.category,
+//    description: post.category + " Category",
+//    openGraph: {
+//      url: "https://disneydreamersguide.com/category/" + post.categorySlug, 
+//      title: "Disney Dreamer's Guide : "+ post.category,
+//      description: post.category + " Category",
+//      type: "website",
+//    },
+//    twitter: {
+//      cardType: "summary_large_image",
+//    },
+//  }
+//}
 
 
-export default async function Category({params: { slug }}) {
-  const posts = await getData(slug)
+export default async function Category() {
+  //{params: { slug }}
+  //const posts = await getData(slug)
   
 
   return (
     <div className="bg-page-pattern">
       <Navbar />
+      {/*
       <CategoryContent posts={posts}/>
+      */}
       <Footer />
     </div>  
   )

@@ -9,12 +9,12 @@ import RedditShare from "../../../components/RedditShare";
 import TwitterShare from "../../../components/TwitterShare";
 
 export async function getStaticParams() {//
-  const res = await fetch('/api/post').then((res) => res.json())
+  const res = await fetch("/api/post/").then((res) => res.json())
   const posts = await res.json()
   return posts.map((post) => ({
       slug: post.slug,
   }))  
-}
+}//
 
 async function getData(slug) {
   const domain = process.env.API_DOMAIN;
@@ -31,68 +31,70 @@ async function getData(slug) {
   return res.json();
 }
 
-export async function generateMetadata({ params: { slug } }, parent) {
-  const postData = await getData(slug);
-  const post = postData[0];
-  // optionally access and extend (rather than replace) parent metadata
-  const previousImages = (await parent).openGraph?.images || [];
+//export async function generateMetadata({ params: { slug } }, parent) {
+//  const postData = await getData(slug);
+//  const post = postData[0];
+//  // optionally access and extend (rather than replace) parent metadata
+//  const previousImages = (await parent).openGraph?.images || [];
+//
+//  return {
+//    title: post.title + " | Disney Dreamer's Guide",
+//    description: post.description,
+//    openGraph: {
+//      images: [
+//        {
+//          url: "https://cdn.disneydreamersguide.com/uploads/" + post.fileName,
+//          width: 800,
+//          height: 600,
+//          alt: post.title,
+//        },
+//        ...previousImages,
+//      ],
+//      url: "https://disneydreamersguide.com/post/" + post.slug,
+//      title: post.title,
+//      description: post.description,
+//      type: "article",
+//      article: {
+//        publishedTime: post.date,
+//        modifiedTime: post.date,
+//        section: post.category,
+//        authors: ["https://disneydreamersguide.com/author/" + post.author],
+//        tags: [post.category],
+//      },
+//    },
+//    twitter: {
+////      cardType: "summary_large_image",
+//    },
+//    additionalMetaTags: [
+//      {
+//        property: "article:published_time",
+//        content: post.date,
+//      },
+//      {
+//        property: "article:modified_time",
+//        content: post.date,
+//      },
+//      {
+//        property: "article:section",
+//        content: post.category,
+//      },
+//      {
+//        property: "article:tag",
+//        content: post.category,
+//      },
+//    ],
+//  };
+//}
 
-  return {
-    title: post.title + " | Disney Dreamer's Guide",
-    description: post.description,
-    openGraph: {
-      images: [
-        {
-          url: "https://cdn.disneydreamersguide.com/uploads/" + post.fileName,
-          width: 800,
-          height: 600,
-          alt: post.title,
-        },
-        ...previousImages,
-      ],
-      url: "https://disneydreamersguide.com/post/" + post.slug,
-      title: post.title,
-      description: post.description,
-      type: "article",
-      article: {
-        publishedTime: post.date,
-        modifiedTime: post.date,
-        section: post.category,
-        authors: ["https://disneydreamersguide.com/author/" + post.author],
-        tags: [post.category],
-      },
-    },
-    twitter: {
-      cardType: "summary_large_image",
-    },
-    additionalMetaTags: [
-      {
-        property: "article:published_time",
-        content: post.date,
-      },
-      {
-        property: "article:modified_time",
-        content: post.date,
-      },
-      {
-        property: "article:section",
-        content: post.category,
-      },
-      {
-        property: "article:tag",
-        content: post.category,
-      },
-    ],
-  };
-}
-
-const Post = async ({ params: { slug } }) => {
-  const postData = await getData(slug);
-  const post = postData[0];
+const Post = () => {
+  /*{params: { slug } }*/
+  //const postData = await getData(slug);
+  //const post = postData[0];
   return (
     <>
       <div className="bg-page-pattern">
         <Navbar />
+     {/*
         <div className="bg-white px-6 py-8 lg:px-8">
           <div className="mx-auto max-w-3xl text-base leading-7 text-gray-700">
             <p className="text-base font-semibold leading-7 text-indigo-600">
@@ -133,6 +135,7 @@ const Post = async ({ params: { slug } }) => {
             <ReactMarkdown>{post.body}</ReactMarkdown>
           </div>
         </div>
+        */}
         <Footer />
       </div>
     </>

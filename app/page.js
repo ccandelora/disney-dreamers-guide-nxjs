@@ -4,7 +4,7 @@ import Footer from '../components/Footer'
 
 async function getData() {
   const domain = process.env.API_DOMAIN
-  const res = await fetch('/api/post',{ next: { revalidate: 900 } })
+  const res = await fetch("/api/post",{ next: { revalidate: 900 } })
  
   if (!res.ok) {
     // This will activate the closest `error.js` Error Boundary
@@ -22,13 +22,15 @@ export const metadata = {
 }
 
 export default async function Home() {
-  const posts = await getData()
+  //const posts = await getData()
   
 
   return (
     <div className="bg-page-pattern">
       <Navbar />
+      {/*
       <HomeContent posts={posts}/>
+      */}
       <Footer />
     </div>  
   )

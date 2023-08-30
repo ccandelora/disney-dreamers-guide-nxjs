@@ -17,10 +17,12 @@ export default function RootLayout({ children }) {
         async
         src="https://www.googletagmanager.com/gtag/js?id=G-J1ZE0F4796"
       />
-      <Script>
+      <Script id="ga">
+        {`
         window.dataLayer = window.dataLayer || []; function gtag()
         {dataLayer.push(arguments)}
         gtag('js', new Date()); gtag('config', 'G-J1ZE0F4796');
+        `}
       </Script>
 
       <Script
@@ -31,11 +33,14 @@ export default function RootLayout({ children }) {
 
       <body className={inter.className}>
         {children}
+        {/*
         <noscript
           dangerouslySetInnerHTML={{
             __html: `<iframe src="https://www.googletagmanager.com/ns.html?id=${GTM_ID}" height="0" width="0" style="display: none; visibility: hidden;"></iframe>`,
           }}
+          
         />
+        */}
       </body>
     </html>
   );

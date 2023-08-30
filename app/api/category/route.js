@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import clientPromise from "../../../libs/mongodb";
 
-
 export async function GET(request){
     const client = await clientPromise;
     const db = client.db();

@@ -4,7 +4,7 @@ import Footer from '../components/Footer'
 
 async function getData() {
   const domain = process.env.API_DOMAIN
-  const res = await fetch(domain + "/api/post",{ next: { revalidate: 900 } })
+  const res = await fetch(domain + "/api/post", { cache: 'no-cache'})
  
   if (!res.ok) {
     // This will activate the closest `error.js` Error Boundary

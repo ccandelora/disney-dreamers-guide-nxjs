@@ -1,17 +1,17 @@
-import Navbar from '../components/Navbar'
-import HomeContent from '../components/HomeContent'
-import Footer from '../components/Footer'
+import Navbar from '../components/Navbar';
+import HomeContent from '../components/HomeContent';
+import Footer from '../components/Footer';
 
 async function getData() {
-  const domain = process.env.API_DOMAIN
+  const domain = process.env.API_DOMAIN;
   const res = await fetch(domain + "/api/post", { cache: 'no-cache'});
  
   if (!res.ok) {
     // This will activate the closest `error.js` Error Boundary
-    throw new Error('Failed to fetch data')
+    throw new Error('Failed to fetch data');
   }
  
-  return res.json()
+  return res.json();
 }
 
 export const metadata = {
@@ -22,7 +22,7 @@ export const metadata = {
 }
 
 export default async function Home() {
-  const posts = await getData()
+  const posts = await getData();
   
   return (
     <div className="bg-page-pattern">
@@ -30,5 +30,5 @@ export default async function Home() {
       <HomeContent posts={posts}/>
       <Footer />
     </div>  
-  )
+  );
 }

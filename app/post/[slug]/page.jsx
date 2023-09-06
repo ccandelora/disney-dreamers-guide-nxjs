@@ -1,25 +1,24 @@
 import React from "react";
 import ReactMarkdown from "react-markdown";
 import { InformationCircleIcon } from "@heroicons/react/20/solid";
-import Navbar from "../../../components/Navbar";
-import Footer from "../../../components/Footer";
 import Image from "next/image";
 import FbShare from "../../../components/FbShare";
 import RedditShare from "../../../components/RedditShare";
 import TwitterShare from "../../../components/TwitterShare";
+import Link from "next/link";
 
 export async function getStaticParams() {
   const domain = process.env.API_DOMAIN;
-  const res = await fetch(domain + "/api/post/").then((res) => res.json())
-  const posts = await res.json()
+  const res = await fetch(domain + "/api/post/").then((res) => res.json());
+  const posts = await res.json();
   return posts.map((post) => ({
-      slug: post.slug,
-  }))  
-}//
+    slug: post.slug,
+  }));
+} //
 
 async function getData(slug) {
   const domain = process.env.API_DOMAIN;
-  const res = await fetch(domain + "/api/post/" + slug, {cache: 'no-cache' });
+  const res = await fetch(domain + "/api/post/" + slug, { cache: "no-cache" });
 
   // The return value is *not* serialized
   // You can return Date, Map, Set, etc.
@@ -87,56 +86,49 @@ export async function generateMetadata({ params: { slug } }, parent) {
   };
 }
 
-const Post = async ({params: { slug } }) => {
+const Post = async ({ params: { slug } }) => {
   const postData = await getData(slug);
   const post = postData[0];
   return (
     <>
-      <div className="bg-page-pattern">
-        <Navbar />
-     
-        <div className="bg-white px-6 py-8 lg:px-8">
-          <div className="mx-auto max-w-3xl text-base leading-7 text-gray-700">
-            <p className="text-base font-semibold leading-7 text-indigo-600">
+      <div className="bg-white px-6 py-8 lg:px-8">
+        <div className="mx-auto max-w-3xl text-base leading-7 text-gray-700">
+          <p className="text-base font-semibold leading-7 text-indigo-600">
+            <Link href={"/category/" + post.categorySlug}>
               {post.category}
-            </p>
-            <h1 className="mt-2 text-3xl font-bold tracking-tight text-black sm:text-4xl">
-              {post.title}
-            </h1>
-            <figure className="mt-16">
-              <Image
-                className="aspect-video rounded-xl bg-gray-50 object-cover"
-                src={
-                  "https://cdn.disneydreamersguide.com/uploads/" + post.fileName
-                }
-                alt={post.alt}
-                width={700}
-                height={467}
+            </Link>
+          </p>
+          <h1 className="mt-2 text-3xl font-bold tracking-tight text-black sm:text-4xl">
+            {post.title}
+          </h1>
+          <figure className="mt-16">
+            <Image
+              className="aspect-video rounded-xl bg-gray-50 object-cover"
+              src={
+                "https://cdn.disneydreamersguide.com/uploads/" + post.fileName
+              }
+              alt={post.alt}
+              width={700}
+              height={467}
+            />
+            <figcaption className="mt-4 flex gap-x-2 text-sm leading-6 text-gray-500">
+              <InformationCircleIcon
+                className="mt-0.5 h-5 w-5 flex-none text-gray-300"
+                aria-hidden="true"
               />
-              <figcaption className="mt-4 flex gap-x-2 text-sm leading-6 text-gray-500">
-                <InformationCircleIcon
-                  className="mt-0.5 h-5 w-5 flex-none text-gray-300"
-                  aria-hidden="true"
-                />
-                {console.log(post)}
-                <a href={post.photographerUrl}>Photo by {post.photographer}</a>
-              </figcaption>
-            </figure>
-            <div className="mt-3 flex items-center gap-x-2 text-xs">
-              <FbShare post={post}/>
-        
-          
-              <RedditShare post={post}  />
-          
-            
-              <TwitterShare post={post}  />
-            </div>
-          
-            <ReactMarkdown>{post.body}</ReactMarkdown>
+              <a href={post.photographerUrl}>Photo by {post.photographer}</a>
+            </figcaption>
+          </figure>
+          <div className="mt-3 flex items-center gap-x-2 text-xs">
+            <FbShare post={post} />
+
+            <RedditShare post={post} />
+
+            <TwitterShare post={post} />
           </div>
+
+          <ReactMarkdown>{post.body}</ReactMarkdown>
         </div>
-    
-        <Footer />
       </div>
     </>
   );

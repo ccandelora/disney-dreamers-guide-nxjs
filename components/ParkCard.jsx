@@ -6,7 +6,7 @@ export default function ParkCard(props) {
 const { lands } = props.lands;
   
   return (
-    <div className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-20 bg-white my-1">
+    <div className="mx-auto py-16  grid max-w-2xl grid-cols-1 gap-x-8 gap-y-20 bg-white my-0">
       <ul
         role="list"
         className="grid grid-cols-1 gap-x-6 gap-y-8"

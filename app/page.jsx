@@ -25,10 +25,6 @@ export default async function Home() {
   const posts = await getData();
   
   return (
-    <div className="bg-page-pattern">
-      <Navbar />
       <HomeContent posts={posts}/>
-      <Footer />
-    </div>  
   );
 }

@@ -1,6 +1,8 @@
 import "./globals.css";
 import Script from "next/script";
 import { Inter } from "next/font/google";
+import Footer from "../components/Footer";
+import Navbar from "../components/Navbar";
 
 const inter = Inter({ subsets: ["latin"] });
 const GTM_ID = "GTM-TDBSR6HL";
@@ -32,8 +34,10 @@ export default function RootLayout({ children }) {
       />
 
       <body className={inter.className}>
-        {children}
-        {/*
+        <div className="bg-page-pattern">
+          <Navbar />
+          {children}
+          {/*
         <noscript
           dangerouslySetInnerHTML={{
             __html: `<iframe src="https://www.googletagmanager.com/ns.html?id=${GTM_ID}" height="0" width="0" style="display: none; visibility: hidden;"></iframe>`,
@@ -41,6 +45,8 @@ export default function RootLayout({ children }) {
           
         />
         */}
+          <Footer />
+        </div>
       </body>
     </html>
   );

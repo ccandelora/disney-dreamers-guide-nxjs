@@ -1,15 +1,13 @@
 "use clinet";
 // Purpose: Displays the Magic Kingdom wait times page
 import React from "react";
-import Navbar from "../../components/Navbar";
-import Footer from "../../components/Footer";
 import ParkCard from "../../components/ParkCard";
 import Hero from "../../components/Hero";
 
 async function getData() {
   const domain = process.env.API_DOMAIN;
   const api = "https://queue-times.com/en-US/parks/7/queue_times.json";
-  const res = await fetch(api, {cache: 'no-cache' });
+  const res = await fetch(api, { cache: "no-cache" });
   // The return value is *not* serialized
   // You can return Date, Map, Set, etc.
 
@@ -26,12 +24,14 @@ export default async function HollywoodStudiosWaitTimes() {
 
   return (
     <>
-      <div className="bg-page-pattern">
-      <Navbar />
+      <Hero
+        photo="/carol-kennedy-X5WdN60n6yk-unsplash.jpg"
+        alt="Hollywood Studios Wait Times"
+        title="Hollywood Studios Wait Times"
+      />
+      <div className="bg-white ">
+        <ParkCard lands={lands} />
       </div>
-      <Hero photo="/carol-kennedy-X5WdN60n6yk-unsplash.jpg" alt="Hollywood Studios Wait Times" title="Hollywood Studios Wait Times"/>
-      <ParkCard lands={lands} />
-      <Footer />
     </>
   );
 }

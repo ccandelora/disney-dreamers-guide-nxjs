@@ -1,15 +1,13 @@
 "use clinet";
 // Purpose: Displays the Magic Kingdom wait times page
 import React from "react";
-import Navbar from "../../components/Navbar";
-import Footer from "../../components/Footer";
 import ParkCard from "../../components/ParkCard";
 import Hero from "../../components/Hero";
 
 async function getData() {
   const domain = process.env.API_DOMAIN;
-  const api = 'https://queue-times.com/en-US/parks/5/queue_times.json';
-  const res = await fetch(api, {cache: 'no-cache' });
+  const api = "https://queue-times.com/en-US/parks/5/queue_times.json";
+  const res = await fetch(api, { cache: "no-cache" });
   if (!res.ok) {
     throw new Error("Failed to fetch data");
   }
@@ -23,12 +21,14 @@ export default async function EpcotWaitTimes() {
 
   return (
     <>
-      <div className="bg-page-pattern">
-      <Navbar />
+      <Hero
+        photo="/frances-gunn-c9z9RlCh0Zo-unsplash.jpg"
+        alt="Epcot"
+        title="Epcot Wait Times"
+      />
+      <div className="bg-white ">
+        <ParkCard lands={lands} />
       </div>
-      <Hero photo="/frances-gunn-c9z9RlCh0Zo-unsplash.jpg" alt="Epcot" title="Epcot Wait Times"/>
-      <ParkCard lands={lands} />
-      <Footer />
     </>
   );
 }

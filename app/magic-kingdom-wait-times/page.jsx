@@ -1,8 +1,6 @@
 'use clinet';
 // Purpose: Displays the Magic Kingdom wait times page
 import React from "react";
-import Navbar from "../../components/Navbar";
-import Footer from "../../components/Footer";
 import ParkCard from "../../components/ParkCard";
 import Hero from "../../components/Hero";
 
@@ -30,12 +28,10 @@ export default async function MagicKingdomWaitTimes() {
 
   return (
     <>
-      <div className="bg-page-pattern">
-      <Navbar />
-      </div>
       <Hero photo={photo} alt={alt} title={title}/>
-      <ParkCard lands={lands}/> 
-      <Footer />
+      <div className="bg-white ">
+        <ParkCard lands={lands}/> 
+      </div>
     </>
   );
 }

@@ -1,12 +1,9 @@
-// Purpose: Displays the Magic Kingdom wait times page
+'use client';
 import React from "react";
-import Navbar from "../../components/Navbar";
-import Footer from "../../components/Footer";
 import ParkCard from "../../components/ParkCard";
 import Hero from "../../components/Hero";
 
-async function getData() {
-  const domain = process.env.API_DOMAIN;
+const getData = async () => {
   const res = await fetch(
     "https://queue-times.com/en-US/parks/8/queue_times.json",
     { cache: "no-cache" }
@@ -20,7 +17,7 @@ async function getData() {
   return res.json();
 }
 
-export default async function AnimalKingdomWaitTimes() {
+export const AnimalKingdomWaitTimes = async () => {
   const lands = await getData();
 
   return (
@@ -36,3 +33,5 @@ export default async function AnimalKingdomWaitTimes() {
     </>
   );
 }
+
+export default AnimalKingdomWaitTimes;

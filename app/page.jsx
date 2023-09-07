@@ -1,8 +1,7 @@
-import Navbar from '../components/Navbar';
+import React from 'react';
 import HomeContent from '../components/HomeContent';
-import Footer from '../components/Footer';
 
-async function getData() {
+const  getData = async () => {
   const domain = process.env.API_DOMAIN;
   const res = await fetch(domain + "/api/post", { cache: 'no-cache'});
  
@@ -21,10 +20,9 @@ export const metadata = {
   type: "website",
 }
 
-export default async function Home() {
+export const Home = async () => {
   const posts = await getData();
-  
-  return (
-      <HomeContent posts={posts}/>
-  );
+  return <HomeContent posts={posts} />;
 }
+ 
+export default Home;

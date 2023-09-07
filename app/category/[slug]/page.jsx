@@ -1,8 +1,7 @@
-import Navbar from "../../../components/Navbar";
+import React from "react";
 import CategoryContent from "../../../components/CategoryContent";
-import Footer from "../../../components/Footer";
 
-export async function getStaticParams() {
+export const getStaticParams = async () => {
   const domain = process.env.API_DOMAIN;
   const res = await fetch(domain + "/api/category/").then((res) => res.json());
   const posts = await res.json();
@@ -11,11 +10,9 @@ export async function getStaticParams() {
   }));
 }
 
-async function getData(slug) {
+const getData = async (slug) => {
   const domain = process.env.API_DOMAIN;
-  const res = await fetch(domain + "/api/category/" + slug);
-  // The return value is *not* serialized
-  // You can return Date, Map, Set, etc.
+  const res = await fetch(domain + "/api/category/" + slug, { cache: "no-cache" });
 
   if (!res.ok) {
     // This will activate the closest `error.js` Error Boundary
@@ -25,11 +22,9 @@ async function getData(slug) {
   return res.json();
 }
 
-export async function generateMetadata({ params: { slug } }, parent) {
+export const generateMetadata = async ({ params: { slug } }, parent) => {
   const postData = await getData(slug);
   const post = postData[0];
-  // optionally access and extend (rather than replace) parent metadata
-  const previousImages = (await parent).openGraph?.images || [];
 
   return {
     title: "Disney Dreamer's Guide : " + post.category,
@@ -46,8 +41,10 @@ export async function generateMetadata({ params: { slug } }, parent) {
   };
 }
 
-export default async function Category({ params: { slug } }) {
+export const Category = async ({ params: { slug } }) => {
   const posts = await getData(slug);
 
   return <CategoryContent posts={posts} />;
 }
+
+export default Category;

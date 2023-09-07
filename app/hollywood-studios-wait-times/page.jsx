@@ -1,16 +1,13 @@
 "use clinet";
-// Purpose: Displays the Magic Kingdom wait times page
+
 import React from "react";
 import ParkCard from "../../components/ParkCard";
 import Hero from "../../components/Hero";
 
-async function getData() {
-  const domain = process.env.API_DOMAIN;
+const getData = async () => {
   const api = "https://queue-times.com/en-US/parks/7/queue_times.json";
   const res = await fetch(api, { cache: "no-cache" });
-  // The return value is *not* serialized
-  // You can return Date, Map, Set, etc.
-
+ 
   if (!res.ok) {
     // This will activate the closest `error.js` Error Boundary
     throw new Error("Failed to fetch data");
@@ -19,7 +16,7 @@ async function getData() {
   return res.json();
 }
 
-export default async function HollywoodStudiosWaitTimes() {
+export const  HollywoodStudiosWaitTimes = async () => {
   const lands = await getData();
 
   return (
@@ -35,3 +32,5 @@ export default async function HollywoodStudiosWaitTimes() {
     </>
   );
 }
+
+export default HollywoodStudiosWaitTimes;

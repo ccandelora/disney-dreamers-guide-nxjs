@@ -1,11 +1,9 @@
 "use clinet";
-// Purpose: Displays the Magic Kingdom wait times page
 import React from "react";
 import ParkCard from "../../components/ParkCard";
 import Hero from "../../components/Hero";
 
-async function getData() {
-  const domain = process.env.API_DOMAIN;
+const  getData = async () => {
   const api = "https://queue-times.com/en-US/parks/5/queue_times.json";
   const res = await fetch(api, { cache: "no-cache" });
   if (!res.ok) {
@@ -15,9 +13,8 @@ async function getData() {
   return res.json();
 }
 
-export default async function EpcotWaitTimes() {
+export const EpcotWaitTimes = async () => {
   const lands = await getData();
-  console.log(lands);
 
   return (
     <>
@@ -32,3 +29,5 @@ export default async function EpcotWaitTimes() {
     </>
   );
 }
+
+export default EpcotWaitTimes;

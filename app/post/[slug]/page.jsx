@@ -16,13 +16,10 @@ export async function getStaticParams() {
   }));
 } //
 
-async function getData(slug) {
+const getData = async (slug) =>  {
   const domain = process.env.API_DOMAIN;
   const res = await fetch(domain + "/api/post/" + slug, { cache: "no-cache" });
-
-  // The return value is *not* serialized
-  // You can return Date, Map, Set, etc.
-
+  
   if (!res.ok) {
     // This will activate the closest `error.js` Error Boundary
     throw new Error("Failed to fetch data");
@@ -34,7 +31,6 @@ async function getData(slug) {
 export async function generateMetadata({ params: { slug } }, parent) {
   const postData = await getData(slug);
   const post = postData[0];
-  // optionally access and extend (rather than replace) parent metadata
   const previousImages = (await parent).openGraph?.images || [];
 
   return {
@@ -119,15 +115,12 @@ const Post = async ({ params: { slug } }) => {
               <a href={post.photographerUrl}>Photo by {post.photographer}</a>
             </figcaption>
           </figure>
-          <div className="mt-3 flex items-center gap-x-2 text-xs">
+          <div className="mt-5 flex items-center gap-x-2 text-xs">
             <FbShare post={post} />
-
             <RedditShare post={post} />
-
             <TwitterShare post={post} />
           </div>
-
-          <ReactMarkdown>{post.body}</ReactMarkdown>
+          <ReactMarkdown className="mt-5">{post.body}</ReactMarkdown>
         </div>
       </div>
     </>

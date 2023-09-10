@@ -16,7 +16,7 @@ export async function getStaticParams() {
   }));
 } //
 
-const getData = async (slug) =>  {
+const getData = async (slug) => {
   const domain = process.env.API_DOMAIN;
   const res = await fetch(domain + "/api/post/" + slug, { cache: "no-cache" });
   
